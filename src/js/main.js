@@ -4,6 +4,9 @@ import modals from './modules/modals';
 import sliders from './modules/sliders';
 import checkTextInputs from './modules/checkTextInputs';
 import showMoreStyles from './modules/showMoreStyles';
+import calc from './modules/calc';
+import portfolio from './modules/portfolio';
+import sizes from './modules/sizes';
 
 window.addEventListener('DOMContentLoaded', () => {
     'use strict';
@@ -16,7 +19,9 @@ window.addEventListener('DOMContentLoaded', () => {
     checkTextInputs('[name="name"]');
     checkTextInputs('[name="message"]');
     showMoreStyles('.button-styles', '#styles .row');
-
+    calc('#size', '#material', '#options', '.promocode', '.calc-price');
+    portfolio('.portfolio-menu li', '.portfolio-block');
+    sizes('.sizes-block');
     
     
 });

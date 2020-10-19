@@ -1,5 +1,6 @@
 import {postData} from '../services/requests';
 import {closeModal} from './modals';
+import {calcSum} from './calc';
 
 const forms = () => {
     const form = document.querySelectorAll('form'),
@@ -21,6 +22,13 @@ const forms = () => {
     };
     
     const clearInputs = () => {
+        const selectOpts = document.querySelectorAll('select option');
+        selectOpts.forEach(option => {
+            if(option.value == "") {
+                option.selected = true;
+            }
+        });
+        document.querySelector('.calc-price').textContent = 'Для расчета нужно выбрать размер картины и материал картины';
         inputs.forEach(item => {
             item.value = '';
         });
@@ -31,7 +39,6 @@ const forms = () => {
 
     upload.forEach(item => {
         item.addEventListener('input', () => {
-            console.log(item.files[0]);
             let dots;
             const arr = item.files[0].name.split('.');
 
@@ -64,9 +71,15 @@ const forms = () => {
             statusMessage.appendChild(textMessage);
 
             const formData = new FormData(item);
+            if(item.classList.contains('calc_form')) {
+                for(let key in calcSum) {
+                    formData.append(key, calcSum[key]);
+                }
+                
+            }
+            
             let api;
             item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.designer : api = path.question;
-            console.log(api);
 
             postData(api, formData)
                 .then(res => {
