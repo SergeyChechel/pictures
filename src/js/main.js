@@ -9,6 +9,7 @@ import portfolio from './modules/portfolio';
 import sizes from './modules/sizes';
 import accordion from './modules/accordion';
 import burger from './modules/burger';
+import scrolling from './modules/scrolling';
 
 window.addEventListener('DOMContentLoaded', () => {
     'use strict';
@@ -26,5 +27,6 @@ window.addEventListener('DOMContentLoaded', () => {
     sizes('.sizes-block');
     accordion('.accordion-heading');
     burger('.burger-menu', '.burger');
+    scrolling('.pageup');
     
 });
