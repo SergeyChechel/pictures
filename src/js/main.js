@@ -7,6 +7,8 @@ import showMoreStyles from './modules/showMoreStyles';
 import calc from './modules/calc';
 import portfolio from './modules/portfolio';
 import sizes from './modules/sizes';
+import accordion from './modules/accordion';
+import burger from './modules/burger';
 
 window.addEventListener('DOMContentLoaded', () => {
     'use strict';
@@ -22,6 +24,7 @@ window.addEventListener('DOMContentLoaded', () => {
     calc('#size', '#material', '#options', '.promocode', '.calc-price');
     portfolio('.portfolio-menu li', '.portfolio-block');
     sizes('.sizes-block');
-    
+    accordion('.accordion-heading');
+    burger('.burger-menu', '.burger');
     
 });
