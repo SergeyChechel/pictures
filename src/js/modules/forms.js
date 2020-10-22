@@ -4,7 +4,7 @@ import {calcSum} from './calc';
 
 const forms = () => {
     const form = document.querySelectorAll('form'),
-          inputs = document.querySelectorAll('input'),
+          
           upload = document.querySelectorAll('[name="upload"]');
     
     const message = {
@@ -21,21 +21,21 @@ const forms = () => {
         question: 'assets/question.php'
     };
     
-    const clearInputs = () => {
-        const selectOpts = document.querySelectorAll('select option');
-        selectOpts.forEach(option => {
-            if(option.value == "") {
-                option.selected = true;
-            }
-        });
-        document.querySelector('.calc-price').textContent = 'Для расчета нужно выбрать размер картины и материал картины';
-        inputs.forEach(item => {
-            item.value = '';
-        });
-        upload.forEach(item => {
-            item.previousElementSibling.textContent = "Файл не выбран";
-        });
-    };
+    // const clearInputs = () => {
+    //     const selectOpts = document.querySelectorAll('select option');
+    //     selectOpts.forEach(option => {
+    //         if(option.value == "") {
+    //             option.selected = true;
+    //         }
+    //     });
+    //     document.querySelector('.calc-price').textContent = 'Для расчета нужно выбрать размер картины и материал картины';
+    //     inputs.forEach(item => {
+    //         item.value = '';
+    //     });
+    //     upload.forEach(item => {
+    //         item.previousElementSibling.textContent = "Файл не выбран";
+    //     });
+    // };
 
     upload.forEach(item => {
         item.addEventListener('input', () => {
@@ -102,6 +102,25 @@ const forms = () => {
                     }, 5000);
                 });
         });
+    });
+};
+
+export function clearInputs() {
+    const selectOpts = document.querySelectorAll('select option');
+    selectOpts.forEach(option => {
+        if(option.value == "") {
+            option.selected = true;
+        }
+    });
+    document.querySelector('.calc-price').textContent = 'Для расчета нужно выбрать размер картины и материал картины';
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(item => {
+        item.value = '';
+    });
+    const upload = document.querySelectorAll('[name="upload"]');
+    upload.forEach(item => {
+        item.previousElementSibling.classList.add('animated', 'fadeIn');
+        item.previousElementSibling.textContent = "Файл не выбран";
     });
 };
 
