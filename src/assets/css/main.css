@@ -535,6 +535,7 @@ h4 {
   text-align: center;
   position: relative;
   z-index: -1000;
+  display: none;
 }
 .calc .button-order {
   margin-top: 6rem;
@@ -1746,6 +1747,7 @@ border: 1px solid white;
   }
   .calc-price {
     margin-top: 2rem;
+    
   }
   .popup-consultation .button-order,
   .popup-design .button-order {

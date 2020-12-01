@@ -1,13 +1,14 @@
 const modals = (state) => {
     
     let btnPressed = false;  
+
     function bindModal(triggerSelector, modalSelector, closeSelector, destroy = false) {
-        const trigger = document.querySelectorAll(triggerSelector),
-            modal = document.querySelector(modalSelector),
-            close = document.querySelector(closeSelector),
-            scroll = calcScroll();
+        const triggers = document.querySelectorAll(triggerSelector),
+                modal = document.querySelector(modalSelector),
+                close = document.querySelector(closeSelector),
+                scroll = calcScroll();
         
-        trigger.forEach(el => {
+        triggers.forEach(el => {
             el.addEventListener('click', (e) => {
                 if(e.target) {
                     e.preventDefault();
@@ -48,6 +49,12 @@ const modals = (state) => {
             closeModal();
         });
     }
+
+    bindModal('.button-design', '.popup-design', '.popup-design .popup-close');
+    bindModal('.button-consultation', '.popup-consultation', '.popup-consultation .popup-close');
+    bindModal('.fixed-gift', '.popup-gift', '.popup-gift .popup-close', true);
+    //showModalByTime('.button-consultation', 5000);
+    //openByScroll('.fixed-gift');
 
     function validate(state, modalSelector) {
         let flag = true;
@@ -94,11 +101,7 @@ const modals = (state) => {
         });
     }
 
-    bindModal('.button-design', '.popup-design', '.popup-design .popup-close');
-    bindModal('.button-consultation', '.popup-consultation', '.popup-consultation .popup-close');
-    bindModal('.fixed-gift', '.popup-gift', '.popup-gift .popup-close', true);
-    // showModalByTime('.button-consultation', 5000);
-    openByScroll('.fixed-gift');
+    
 
 };
 

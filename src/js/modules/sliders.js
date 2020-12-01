@@ -4,6 +4,7 @@ const sliders = (slides, dir, prev, next) => {
     let rotate;
 
     const items = document.querySelectorAll(slides);
+    
 
     function showSlides(n) {
         if(n > items.length) {
