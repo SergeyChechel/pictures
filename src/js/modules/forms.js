@@ -5,8 +5,8 @@ import {calcSum} from './calc';
 const forms = () => {
     const form = document.querySelectorAll('form'),
           upload = document.querySelectorAll('[name="upload"]');
-    let error = false;
-    
+    let error;
+
     const message = {
         prevent: 'Для расчета необходимо выбрать размер и материал картины',
         loading: 'Загрузка...',
@@ -36,7 +36,7 @@ const forms = () => {
     form.forEach(item => {
         item.addEventListener('submit', (e) => {
             e.preventDefault();
-
+            
             const formData = new FormData(item);
             let statusMessage = document.createElement('div');
             let statusImg = document.createElement('img');
@@ -58,6 +58,7 @@ const forms = () => {
                         }, 500);
                     }, 5000);
                 } else {
+                    error = false;
                     for(let key in calcSum) {
                         formData.append(key, calcSum[key]);
                     }
@@ -94,13 +95,13 @@ const forms = () => {
                     textMessage.textContent = message.failure;
                 })
             
-            
-                
-            
             }
 
 
             setTimeout(() => {
+                for(let key in calcSum) {
+                    delete calcSum[key];
+                }
                 statusMessage.remove();
                 item.style.display = 'block';
                 item.classList.remove('fadeOutUp');
