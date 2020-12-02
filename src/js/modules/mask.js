@@ -1,18 +1,5 @@
 const mask = function(selector) {
-
-    let setCursorPosition = (pos, elem) => {
-        elem.focus();
-        if(elem.setSelectionRange) {
-            elem.setSelectionRange(pos, pos);
-        } else if(elem.createTextRange) {
-            let range = elem.createTextRange();
-            range.collapse(true);
-            range.moveStart('caracter', pos);
-            range.moveEnd('caracter', pos);
-            range.select();
-        }
-    };
-    
+  
     function createMask(event) {
         let matrix = '+7 (___) ___ __ __',
             i = 0,
@@ -26,14 +13,27 @@ const mask = function(selector) {
             return /[_\d]/.test(sym) && i < val.length ? val.charAt(i++) : i >= val.length ? '' : sym;
         });
 
-        if(event.type === 'blur') {
-            if(this.value.length == 2) {
+        if (event.type === 'blur') {
+            if (this.value.length == 2) {
                 this.value = '';
             }
         } else {
             setCursorPosition(this.value.length, this);
         }
     }
+
+    let setCursorPosition = (pos, elem) => {
+        elem.focus();
+        if(elem.setSelectionRange) {
+            elem.setSelectionRange(pos, pos);
+        } else if(elem.createTextRange) {
+            let range = elem.createTextRange();
+            range.collapse(true);
+            range.moveStart('caracter', pos);
+            range.moveEnd('caracter', pos);
+            range.select();
+        }
+    };
 
     let inputs = document.querySelectorAll(selector);
 
@@ -46,3 +46,4 @@ const mask = function(selector) {
 }
 
 export default mask;
+

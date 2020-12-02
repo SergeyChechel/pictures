@@ -1,12 +1,15 @@
 const checkTextInputs = (selector) => {
 
     const txtInputs = document.querySelectorAll(selector);
+
     txtInputs.forEach(input => {
+
         input.addEventListener('keypress', (e) => {
             if(e.key.match(/[^а-яё 0-9]/ig)) {
                 e.preventDefault();
             }
         });
+
         input.addEventListener('change', () => {
             const val = input.value;
             for(let i = 0; i < val.length; i++) {
@@ -22,3 +25,4 @@ const checkTextInputs = (selector) => {
 };
 
 export default checkTextInputs;
+

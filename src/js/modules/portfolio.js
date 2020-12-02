@@ -10,17 +10,19 @@ const portfolio = (tabs, contentItem) => {
     });
 
     function showTabContent(tab) {
+
         const portfolioNo = document.querySelector('.portfolio-no');
         portfolioNo.classList.add('animated', 'fadeIn');
         portfolioNo.style.display = 'none';
-        contents.forEach(el => {
-            el.classList.add('animated', 'fadeIn');
-            el.style.display = 'block';
-            if(tab.classList[0] !== 'all' && tab.classList[0] !== el.classList[2]) {
-                el.style.display = 'none';
+        
+        contents.forEach(block => {
+            block.classList.add('animated', 'fadeIn');
+            block.style.display = 'block';
+            if(tab.classList[0] !== 'all' && tab.classList[0] !== block.classList[2]) {
+                block.style.display = 'none';
             }
             if(tab.classList[0] === 'grandmother' || tab.classList[0] === 'granddad') {
-                el.style.display = 'none';
+                block.style.display = 'none';
                 portfolioNo.style.display = 'block';
             }
         });

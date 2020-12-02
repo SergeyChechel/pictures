@@ -1,6 +1,7 @@
 import {getResource} from '../services/requests';
 
 const showMoreStyles = (trigger, wrapper) => {
+
     const btn = document.querySelector(trigger);
 
     // cards.forEach(card => {

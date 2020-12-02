@@ -10,6 +10,7 @@ const dist = "../../Downloads/OSPanel/domains/test/";
 
 gulp.task("copy-html", () => {
     return gulp.src("./src/index.html")
+    
                 .pipe(gulp.dest(dist))
                 .pipe(browsersync.stream());
 });
