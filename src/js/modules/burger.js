@@ -1,21 +1,21 @@
 const burger = (menuSelector, burgerSelector) => {
 
-    const menuElem = document.querySelector(menuSelector);
-    const burgerElem = document.querySelector(burgerSelector);
+    const menu = document.querySelector(menuSelector);
+    const burger = document.querySelector(burgerSelector);
 
-    menuElem.style.display = 'none';
+    menu.style.display = 'none';
 
-    burgerElem.addEventListener('click', () => {
-        if (menuElem.style.display == 'none' && window.screen.availWidth < 993) {
-            menuElem.style.display = 'block';
+    burger.addEventListener('click', () => {
+        if (menu.style.display == 'none' && window.screen.availWidth < 993) {
+            menu.style.display = 'block';
         } else {
-            menuElem.style.display = 'none';
+            menu.style.display = 'none';
         }
     });
 
     window.addEventListener('resize', () => {
         if (window.screen.availWidth > 992) {
-            menuElem.style.display = 'none';
+            menu.style.display = 'none';
         }
     });
     

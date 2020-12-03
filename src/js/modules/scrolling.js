@@ -1,21 +1,22 @@
-const scrolling = (upSelector) => {
+const scrolling = (upSelector, speed_) => {
 
-    const upEl = document.querySelector(upSelector);
+    let up = document.querySelector(upSelector);
 
     window.addEventListener('scroll', () => {
+        
         if (document.documentElement.scrollTop > 1650) {
-            upEl.classList.add('animated', 'fadeIn');
-            upEl.classList.remove('fadeOut');
+            up.classList.remove('fadeOut');
+            up.classList.add('animated', 'fadeIn');
         } else {
-            upEl.classList.add('fadeOut');
-            upEl.classList.remove('fadeIn');
+            up.classList.remove('fadeIn');
+            up.classList.add('fadeOut');
         }
     });
 
     //  Scrolling with requestAnimationFrame
 
     let links = document.querySelectorAll('[href^="#"]'),
-        speed = 0.3;
+        speed = +(speed_/100).toFixed(1);
 
     links.forEach(link => {
         link.addEventListener('click', function(event) {
@@ -25,14 +26,16 @@ const scrolling = (upSelector) => {
                 hash = this.hash,
                 toBlock = document.querySelector(hash).getBoundingClientRect().top,
                 start = null;
+            console.log(widthTop); //0
+            console.log(toBlock); //1645
 
             requestAnimationFrame(step);
 
             function step(time) {
+
                 if (start === null) {
                     start = time;
                 }
-
                 let progress = time - start,
                     r = toBlock < 0 ? Math.max(widthTop - progress/speed, widthTop + toBlock) : 
                         Math.min(widthTop + progress/speed, widthTop + toBlock);
@@ -52,32 +55,41 @@ const scrolling = (upSelector) => {
 
     // const el = document.documentElement,
     //       body = document.body;
+    // let links = document.querySelectorAll('[href^="#"]');
 
-    // const calcScroll = () => {
-    //     upEl.addEventListener('click', function(event) {
-    //         let scrollTop = Math.round(body.scrollTop || el.scrollTop);
-    //         if (this.hash !== '') {
-    //             event.preventDefault();
-    //             let hashElement = document.querySelector(this.hash),
-    //                 hashElementTop = 0;
-    //             while (hashElement.offsetParent) {
-    //                 hashElementTop += hashElement.offsetTop;
-    //                 hashElement = hashElement.offsetParent;
-    //             }
-    //             hashElementTop = Math.round(hashElementTop);
-    //             smoothScroll(scrollTop, hashElementTop, this.hash);
-    //         }
-    //     });
-    // };
+    //     const calcScroll = () => {
+    //         links.forEach(link => {
+    //             link.addEventListener('click', function(event) {
+    //                 event.preventDefault();
+    //                 let scrollTop = Math.round(body.scrollTop || el.scrollTop);
+                    
+    //                 if (this.hash !== '') {
+    //                     event.preventDefault();
+
+    //                     let hashElement = document.querySelector(this.hash),
+    //                         hashElementTop = 0;
+                        
+    //                     while (hashElement.offsetParent) {
+    //                         hashElementTop += hashElement.offsetTop;
+    //                         hashElement = hashElement.offsetParent;
+    //                     }
+
+    //                     hashElementTop = Math.round(hashElementTop);
+    //                     smoothScroll(scrollTop, hashElementTop, this.hash);
+
+    //                 }
+    //             });
+    //         })
+    //     };
 
     // const smoothScroll = (from, to, hash) => {
     //     let timeInterval = 1,
     //         prevScrollTop,
     //         speed;
     //     if (to > from) {
-    //         speed = 30;
+    //         speed = speed_;
     //     } else {
-    //         speed = -30;
+    //         speed = -speed_;
     //     }
     //     let move = setInterval(function() {
     //         let scrollTop = Math.round(body.scrollTop || el.scrollTop);
