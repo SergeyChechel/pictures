@@ -26,8 +26,6 @@ const scrolling = (upSelector, speed_) => {
                 hash = this.hash,
                 toBlock = document.querySelector(hash).getBoundingClientRect().top,
                 start = null;
-            console.log(widthTop); //0
-            console.log(toBlock); //1645
 
             requestAnimationFrame(step);
 

@@ -26,7 +26,7 @@ const showMoreStyles = (trigger, wrapper) => {
     function createCards(response) {
         response.forEach(({src, title, link}) => {
             let card = document.createElement('div');
-                card.classList.add('col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1', 'animated', 'fadeInUp');
+                card.classList.add('col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1', 'animated', 'fadeInDown');
                 card.innerHTML = `
                     <div class='styles-block'>
                         <img src=${src} alt='style'>
