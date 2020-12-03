@@ -12,6 +12,19 @@ const drop = () => {
         });
     });
 
+    ['dragenter','dragover'].forEach(eventName => {
+        fileInputs.forEach(input => {
+            input.addEventListener(eventName, () => highlight(input), false);
+        });
+    });
+
+    ['dragleave','drop'].forEach(eventName => {
+        fileInputs.forEach(input => {
+            input.addEventListener(eventName, () => unhighlight(input), false);
+        });
+    });
+
+    
     function preventDefaults(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -30,17 +43,7 @@ const drop = () => {
         `;
     }
 
-    ['dragenter','dragover'].forEach(eventName => {
-        fileInputs.forEach(input => {
-            input.addEventListener(eventName, () => highlight(input), false);
-        });
-    });
-
-    ['dragleave','drop'].forEach(eventName => {
-        fileInputs.forEach(input => {
-            input.addEventListener(eventName, () => unhighlight(input), false);
-        });
-    });
+    
 
     let mes;
 
@@ -58,28 +61,28 @@ const drop = () => {
                 file.append('file', input.files[0]);
                 postData('assets/server.php', file)
                     .then(res => {
+                        console.log(res);
                         const dropemail = document.querySelector('.dropemail');
                         mes = document.createElement('p');
-
-                        const config = {
+                        
+                        const observer = new MutationObserver(callback);
+                        
+                        const observerConfig = {
                             attributes: true,
                             childList: true,
                             subtree: true
                         }; 
-                        const observer = new MutationObserver(callback);
 
                         mes.classList.remove('fadeOut');
                         mes.classList.add('animated', 'fadeIn');
                         mes.style.marginTop = '20px';
                         mes.textContent = `Ваше фото ${name} отправлено. Ждем дальнейших инструкций на email адресс выше. Спасибо!`;
                         dropemail.insertAdjacentElement('afterend', mes);
+                        
                         setTimeout(() => {
+                            observer.observe(mes.parentNode, observerConfig);
                             mes.classList.remove('fadeIn');
                             mes.classList.add('fadeOut');
-                            observer.observe(mes, config);
-                            mes.style.opacity = 0;
-                            
-
                         }, 7000);
                     })
                     .catch((e) => {
@@ -98,11 +101,11 @@ const drop = () => {
             } else if (mutation.type === 'attributes') {
                 // console.log('The ' + mutation.attributeName + ' attribute was modified.');
                 setTimeout(() => {
-                    mes.style.display = 'none';
                     clearInputs();
                 }, 1000); 
             }
         }
+        observer.disconnect();
     };
 
 };
